@@ -9,8 +9,7 @@ bot = telebot.TeleBot(TOKEN) # Создаю бота с определенным
  											 # Она действует на все функции ниже
  											 # До момента пока ты не пропишешь такую же функцию но на другое событие
 def reverse_text(message): # message это большой массив с большим количество атрибутов
-	reverse_message = reversed(message.text)
-	print(str(reverse_message))
+	reverse_message = message.text[::-1]
 	bot.send_message(message.chat.id, reverse_message)
 
 bot.polling(none_stop=True) # Эта функция не дает боту выключиться
