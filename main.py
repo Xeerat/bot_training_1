@@ -19,13 +19,26 @@ dp = Dispatcher(bot)
 async def send_welcome(msg: types.Message):
 	# await - дождаться msg от пользователя
 	# answer - просто ответ
-	await msg.answer(
-		f'Я бот. Приятно познакомиться {msg.from_user.first_name}')
+	await msg.answer('Приветствую, я бот Пери. Приятно познакомиться ' + 
+		f'{msg.from_user.first_name}.' + '\nЕсли ты хочешь перевернуть какое' + 
+		'-то слово, то напиши \n"/п".')
+
+@dp.message_handler(commands=['п'])
+async def ge_text_reverse(msg: types.Message):
+	"""Переворот слов"""
+	# НЕДОДЕЛАНО
+	await msg.answer("НЕТ")
 
 @dp.message_handler(content_types=['text'])
 async def get_text_messages(msg: types.Message):
+	"""Ответ на многие текстовые сообщения"""
+	# Ответ на "Привет"
 	if msg.text.lower() == 'привет':
-		await msg.answer('Привет!')
+		await msg.reply('Привет еще раз')
+	# Ответ на "Как дела?"
+	elif msg.text.lower() == 'как дела' or msg.text.lower() == 'как дела?':
+		await msg.reply('Нормально. Как сам?')
+	# Ответ на что то неизвестное
 	else:
 		# reply - ответ на определенное сообщение
 		await msg.reply("Не понимаю что это значит.")
