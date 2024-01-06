@@ -17,7 +17,7 @@ dp = Dispatcher(bot)
 @dp.message_handler(commands=['start', 'help'])
 # asyns def - особенность aiogram
 async def send_welcome(msg: types.Message):
-	# await - дождаться msg от пользователя
+	# await - сделать что то только после сообщения пользователя
 	# answer - просто ответ
 	await msg.answer('Приветствую, я бот Пери. Приятно познакомиться ' + 
 		f'{msg.from_user.first_name}.' + '\nЕсли ты хочешь перевернуть какое' + 
@@ -31,7 +31,7 @@ async def ge_text_reverse(msg: types.Message):
 
 @dp.message_handler(content_types=['text'])
 async def get_text_messages(msg: types.Message):
-	"""Ответ на многие текстовые сообщения"""
+	"""Ответ на текстовые сообщения"""
 	# Ответ на "Привет"
 	if msg.text.lower() == 'привет':
 		await msg.reply('Привет еще раз')
