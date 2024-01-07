@@ -31,12 +31,12 @@ async def food_size_chosen(message: types.Message, state: FSMContext):
 	if message.text.lower() not in available_food_sizes:
 		await message.answer("Пожалуйста, выберите размер порции, используя клавиатуру ниже")
 		return
-	user_data = await state.get_state()
+	user_data = await state.get_data()
 	await message.answer(f"Вы заказали {message.text.lower()} порцию {user_data['chosen_food']}.\n"
-		f"Попрубуйте теперь заказать напитки: /drinks", reply_markup=types.ReplyKeyboardRemove())
+		f"Попробуйте теперь заказать напитки: /drinks", reply_markup=types.ReplyKeyboardRemove())
 	await state.finish()
 
 def register_handlers_food(dp: Dispatcher):
-	dp.register_message_handler(food_start, command='food', state="*")
+	dp.register_message_handler(food_start, commands='food', state="*")
 	dp.register_message_handler(food_chosen, state=OrderFood.waiting_for_food_name)
 	dp.register_message_handler(food_size_chosen, state=OrderFood.waiting_for_food_size)			
