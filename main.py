@@ -1,5 +1,5 @@
-import asyncio
-import logging
+from asyncio import run
+from logging import getLogger, basicConfig, INFO
 
 from aiogram import Bot, Dispatcher
 from aiogram.types import BotCommand
@@ -9,7 +9,7 @@ from app.handlers.drinks import register_handlers_drinks
 from app.handlers.food import register_handlers_food
 from app.handlers.common import register_handlers_common
 
-logger = logging.getLogger(__name__)
+logger = getLogger(__name__)
 
 async def set_commands(bot: Bot):
 	commands = [
@@ -20,7 +20,7 @@ async def set_commands(bot: Bot):
 	await bot.set_my_commands(commands)
 
 async def main():
-	logging.basicConfig(level=logging.INFO,
+	basicConfig(level=INFO,
 		format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
 	)
 	logger.error("Starting bot")
@@ -37,4 +37,4 @@ async def main():
 	await dp.start_polling()
 
 if __name__ == '__main__':
-	asyncio.run(main())
+	run(main())
